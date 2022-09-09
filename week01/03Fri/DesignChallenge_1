@@ -1,0 +1,15 @@
+#include <stdio.h>
+
+//
+// write a program that converts inches, given by the 
+// user, to cm and display to screen.
+//
+// prog71985 - fall 2022
+// steve h (in class)
+
+int main(void)
+// input from user (as a number)
+
+// convert
+
+// display output (to screen)

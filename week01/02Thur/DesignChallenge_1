@@ -1,0 +1,26 @@
+#include <stdio.h>
+
+//
+// write a program to take user input, as a number, and convert it from 
+// inches to cm. and display to the user.
+//
+// prog71985 - fall 2022
+// steve h (in class)
+//
+// sometimes you will also see a version history...
+
+
+int main(void)
+{
+    // get input from user
+    float input;
+    printf("enter a number please : ");
+    scanf("%f", &input);
+    
+
+    // do the math
+
+    //print the output
+
+    return 0;
+}
