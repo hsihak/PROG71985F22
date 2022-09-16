@@ -1,0 +1,13 @@
+Look forward to a note about 'online' delivery of Tuesday class 
+
+Our keywords so far:
+int (%d)            printf          #define 
+float (%f)          scanf
+double (%ld)        #include
+and
+%c => format specifier for char
+%s => format specifier for string
+
+Let's talk types:
+    static v. dynamic
+    strong v. weak
