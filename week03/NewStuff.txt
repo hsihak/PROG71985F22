@@ -1,0 +1,40 @@
+style things:
+    1) comment header block  include your name
+    2) good/descriptive variable names
+    3) good structure/ proximity  of variable and use
+    4) no magic values.
+    5) consistency  (pick some best practices and stick to them)
+
+printf, scanf - be sure to match number of format specifiers to parameters
+
+size_t is useful when negative numbers are undesirable and/or when trying to be
+portable across architectures
+
+lvalue, rvalue
+    1) lvalue has an accessible storage location (a place to put it)
+    2) rvalue does not
+    * especially useful when trying to understand error messages
+
+
+
+-------
+topics
+    while loops  (< <=  > >= !- ==)
+
+    pre/post increment/decrement
+
+    casting (implicit and explicit)
+
+    true/false
+
+    do...while, for loops
+
+    if else else_if
+
+    conditional oper:  (cond) ? yes : no
+
+    continue 
+    break
+    switch and case
+
+    goto
