@@ -1,0 +1,31 @@
+Recall:
+ - We wish to split our programs into a set of 
+   functions (for many reasons, check slides)
+ - we will organize 'related things' into 'components',
+   which are made up of a .c and a .h file
+    - declarations and the like in .h file and
+      implementation in .c file (no exceptions!)
+
+Now, 
+00. from tuesday, a short note about how CLion tries to help us
+0. from last week: a short note about bool
+1. A quick dive into debugger (step through our current program)
+2. complete the 'explosion' of our example
+    a. 
+		#pragma once 
+
+		<content>
+       or
+		#ifndef UTILS
+		#define UTILS
+
+		<content>
+
+		#endif 
+
+       More info: https://blog.devgenius.io/pragma-once-versus-include-guards-in-c-c-9bfbdd24dd78
+
+3. unit tests - automation (sep of duties or single resp)
+	- multiple unit tests (all cases)
+	- must use notion of expected vs. actual
+4. pass by value, pass by reference

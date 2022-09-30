@@ -1,0 +1,9 @@
+
+just add true/false to last week's example
+
+re-inforce the notion that you can use ++ or -- 
+and you can += 7 (for weekly)
+you can *=
+and /=
+
+
