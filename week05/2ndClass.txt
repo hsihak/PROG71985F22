@@ -1,0 +1,33 @@
+﻿Quote of the day:
+"Good functions communicate what they do so that you don’t have to dig in and read them to know what’s going on. Cognitive load is one of the biggest hurdles to programmer productivity. " 
+			https://medium.com/thinkster-io/code-smell-side-effects-caf799df2151
+
+
+Thoughts on midterm
+
+Start on program 05, then the fgets one
+
+By 1 hour...
+
+Coding:
+-> create a student ADT with attributes of name and student number.  Operations should be to create and print student.
+
+     prototypes:
+        struct student CreateStudent(char[], int);
+	void PrintStudent(struct student);
+
+
+-> create a main program that uses/exercises this new ADT.
+
+
+-> create a professor ADT with attributes of name and department.
+Operations should be to create and print professor.
+
+     prototypes:
+        struct professor CreateProfessor(char[], char[]);
+	void PrintProfessor(struct professor);
+
+
+
+
+-> create a participant ADT, which is a union of student and professor.
