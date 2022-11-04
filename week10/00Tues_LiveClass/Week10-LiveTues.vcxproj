@@ -127,11 +127,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Error.c" />
     <ClCompile Include="Source.c" />
     <ClCompile Include="StringUtils.c" />
     <ClCompile Include="student.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Error.h" />
     <ClInclude Include="StringUtils.h" />
     <ClInclude Include="student.h" />
   </ItemGroup>

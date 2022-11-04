@@ -16,9 +16,4 @@ typedef struct student
 
 STUDENT CreateStudent(char*, int);
 
-//char* GetNameFromStudent(STUDENT);		//so bad.  never do this!
-bool GetNameFromStudentWithReturn(STUDENT, char*);
-
 void PrintStudent(STUDENT);
-void SaveStudentToStream(STUDENT, FILE*);
-STUDENT ReadStudentFromStream(FILE*);

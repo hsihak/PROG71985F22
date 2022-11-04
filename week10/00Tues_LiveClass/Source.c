@@ -12,7 +12,7 @@ int main(void)
 	STUDENT one;
 	printf("size of uninitialized struct: %d\n", (int)sizeof(one));
 
-	STUDENT two = CreateStudent("two", 12345);
+	STUDENT two = CreateStudent("bobby(2)", 12345);
 	printf("size of initialized struct: %d\n", (int)sizeof(two));
 	// no surprises at this point, when declared, a struct has it's alloctions
 	// set - this is why we copy a string into a struct member string (overwriting the 0s)
@@ -25,5 +25,6 @@ int main(void)
 	// think (and say) 4 bytes (or DWORD - double word) for an address, when it should 
 	// be 8 bytes or QWORD (quad word) for 64 bit computing.
 	
+	PrintStudent(two);
 	return 0;
 }
