@@ -1,0 +1,101 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include "classroom.h"
+#include <stdio.h>
+#include <string.h>
+
+// some words about implementation of classroom
+// steveh - week9 - prog71985 - fall22
+
+CLASSROOM CreateClassroom(char* name)
+{
+	CLASSROOM c;
+	//c.currentNumber = 0;
+	c.participantList = CreateList();
+	strncpy(c.name, name, MAXSIZE);
+	return c;
+}
+
+int GetClassroomCapacity(CLASSROOM c)
+{
+	return MAXPARTICIPANTS;
+}
+
+bool IsClassroomFull(CLASSROOM c)
+{
+	if (GetCurrentCountFromList(c.participantList) >= GetClassroomCapacity(c))
+		return true;
+	else
+		return false;
+}
+
+
+bool AddParticipantToClassroom(CLASSROOM* c, PARTICIPANT p)
+{
+	if (IsClassroomFull(*c))
+	{
+		return false;
+	}
+	else
+	{
+		AddParticipantToClassroom(c, p);
+		return true;
+	}
+}
+
+// PARTICIPANT GetParticipantFromClassroom(CLASSROOM c)
+// {
+// }
+
+void PrintClassroom(CLASSROOM c)
+{
+	printf("Class name: %s\n", c.name);
+	printf("Class capacity: %d\n", MAXPARTICIPANTS);
+	printf("Class current enrollment: %d\n", GetCurrentCountFromList(c.participantList));
+	printf("Enrolled participants:\n");
+	Display(c.participantList);
+}
+
+bool SaveClassroomToDisk(CLASSROOM c, char* filename)
+{
+	FILE* fp;
+	if((fp = fopen(filename, "w")) == NULL)
+		return false;
+	
+	fprintf(fp, "%s\n", c.name);				// write class name to disk
+	fprintf(fp, "%d\n", GetCurrentCountFromList(c.participantList));		// write number of participants - useful for loop
+	WriteParticipantListToStream(c.participantList, fp);
+	fclose(fp);
+	return true;
+}
+
+bool LoadClassroomFromDisk(CLASSROOM* c, char* filename)
+{
+	FILE* fp;
+	if ((fp = fopen(filename, "r")) == NULL)
+		return false;
+
+	char fileBuffer[LONGESTLINE];
+	fgets(fileBuffer, LONGESTLINE, fp);
+	strncpy(c->name, fileBuffer, MAXSIZE);		//copy read-in class name into classroom struct.
+
+	c->currentNumber = 0;	// if we don't initialize this number, we will have issues later.
+
+	int participantCount;   // read from file
+	if ((fscanf(fp, "%d\n", &participantCount)) != 1)    // this becomes out loop counter max
+	{
+		fclose(fp);
+		return false;			// something bad is happening - return with fail code
+	}
+
+	for (int i = 0; i < participantCount; i++)
+	{
+		PARTICIPANT p;
+		if (ReadParticipantFromStream(&p, fp))
+			AddParticipantToClassroom(c, p);
+		else
+			return false;
+	}
+
+	fclose(fp);
+	return true;
+}
