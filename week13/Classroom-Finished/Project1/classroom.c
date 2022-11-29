@@ -1,0 +1,113 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include "classroom.h"
+#include "ListADT.h"
+#include <stdio.h>
+#include <string.h>
+
+// some words about implementation of classroom
+// steveh - week9 - prog71985 - fall22
+
+CLASSROOM CreateClassroom(char* name)
+{
+	CLASSROOM c;
+	c.participantList = CreateList();
+	strncpy(c.name, name, MAXSIZE);
+	return c;
+}
+
+int GetClassroomCapacity(CLASSROOM c)
+{
+	return MAXPARTICIPANTS;
+}
+
+bool IsClassroomFull(CLASSROOM c)
+{
+	if (GetCurrentCountOfParticipants(c) >= GetClassroomCapacity(c))
+		return true;
+	else
+		return false;
+}
+
+
+int GetCurrentCountOfParticipants(CLASSROOM c )
+{
+	return GetCurrentCount(c.participantList);
+}
+
+bool AddParticipantToClassroom(CLASSROOM* c, PARTICIPANT p)
+{
+	if (IsClassroomFull(*c))
+		return false;
+	else
+		return AddParticipantToList(&c->participantList, p);
+}
+
+
+void PrintClassroom(CLASSROOM c)
+{
+	printf("Class name: %s\n", c.name);
+	printf("Class capacity: %d\n", GetClassroomCapacity(c));
+	printf("Class current enrollment: %d\n", GetCurrentCountOfParticipants(c));
+	printf("Enrolled participants:\n");
+	Display(c.participantList);
+}
+
+bool SaveClassroomToDisk(CLASSROOM c, char* filename)
+{
+	FILE* fp;
+	if((fp = fopen(filename, "w")) == NULL)
+		return false;
+	
+	fprintf(fp, "%s\n", c.name);				// write class name to disk
+	fprintf(fp, "%d\n", GetCurrentCountOfParticipants(c));		// write number of participants - useful for loop
+	IterateListToStream(c.participantList, fp);
+	fclose(fp);
+	return true;
+}
+
+bool LoadClassroomFromDisk(CLASSROOM* c, char* filename)
+{
+	FILE* fp;
+	if ((fp = fopen(filename, "r")) == NULL)
+		return false;
+
+	char fileBuffer[LONGESTLINE];
+	fgets(fileBuffer, LONGESTLINE, fp);
+	strncpy(c->name, fileBuffer, MAXSIZE);		//copy read-in class name into classroom struct.
+
+	c->participantList = CreateList();
+
+	int participantCount;												  // read from file
+	if ((fscanf(fp, "%d\n", &participantCount)) != 1)    // this becomes out loop counter max
+	{
+		fclose(fp);
+		return false;			// something bad is happening - return with fail code
+	}
+
+	for (int i = 0; i < participantCount; i++)
+	{
+		PARTICIPANT p;
+		if (ReadParticipantFromStream(&p, fp))
+			AddParticipantToClassroom(c, p);
+		else
+			return false;
+	}
+
+	fclose(fp);
+	return true;
+}
+
+PARTICIPANT* SearchForParticipantInClassroom(CLASSROOM c, PARTICIPANT p)
+{
+	return SearchForParticipantInList(c.participantList, p);
+}
+
+PARTICIPANT* RecursiveSearchForParticipantInClassroom(CLASSROOM c, PARTICIPANT p)
+{
+	return RecursiveSearchForParticipantInListNode(c.participantList.list, p);
+}
+
+void DisposeClassroom(CLASSROOM c)
+{
+	DisposeList(&c.participantList);
+}
